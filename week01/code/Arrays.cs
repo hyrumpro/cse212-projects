@@ -8,6 +8,7 @@ public static class Arrays
     /// <returns>array of doubles that are the multiples of the supplied number</returns>
     public static double[] MultiplesOf(double number, int length)
     {
+<<<<<<< HEAD
         // Step 1: Create a new array of size 'length' to store the multiples
         // Step 2: Initialize the first element with the starting number
         // Step 3: Use a loop to fill the array with multiples
@@ -19,6 +20,14 @@ public static class Arrays
             result[i] = number * (i + 1);
         }
         return result;
+=======
+        // TODO Problem 1 Start
+        // Remember: Using comments in your program, write down your process for solving this problem
+        // step by step before you write the code. The plan should be clear enough that it could
+        // be implemented by another person.
+
+        return []; // replace this return statement with your own
+>>>>>>> 6b85fbcfade0aba95c7e3800b7117b8632df44f6
     }
 
     /// <summary>
@@ -30,6 +39,7 @@ public static class Arrays
     /// </summary>
     public static void RotateListRight(List<int> data, int amount)
     {
+<<<<<<< HEAD
         // Step 1: Get the portion of the list that needs to move to the front
         // Step 2: Get the portion of the list that needs to move to the back
         // Step 3: Clear the original list
@@ -42,5 +52,11 @@ public static class Arrays
         data.Clear();
         data.AddRange(secondPart);
         data.AddRange(firstPart);
+=======
+        // TODO Problem 2 Start
+        // Remember: Using comments in your program, write down your process for solving this problem
+        // step by step before you write the code. The plan should be clear enough that it could
+        // be implemented by another person.
+>>>>>>> 6b85fbcfade0aba95c7e3800b7117b8632df44f6
     }
 }
