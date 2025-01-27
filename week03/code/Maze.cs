@@ -14,7 +14,7 @@
 /// If there is a wall, then throw an InvalidOperationException with the message "Can't go that way!".  If there is no wall,
 /// then the 'currX' and 'currY' values should be changed.
 /// </summary>
-public class Maze
+public class Maze 
 {
     private readonly Dictionary<ValueTuple<int, int>, bool[]> _mazeMap;
     private int _currX = 1;
@@ -25,14 +25,18 @@ public class Maze
         _mazeMap = mazeMap;
     }
 
-    // TODO Problem 4 - ADD YOUR CODE HERE
     /// <summary>
     /// Check to see if you can move left.  If you can, then move.  If you
     /// can't move, throw an InvalidOperationException with the message "Can't go that way!".
     /// </summary>
     public void MoveLeft()
     {
-        // FILL IN CODE
+        var currentPosition = (_currX, _currY);
+        if (!_mazeMap.ContainsKey(currentPosition) || !_mazeMap[currentPosition][0]) // Check if left is allowed
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
+        _currX--; // Move left
     }
 
     /// <summary>
@@ -41,7 +45,12 @@ public class Maze
     /// </summary>
     public void MoveRight()
     {
-        // FILL IN CODE
+        var currentPosition = (_currX, _currY);
+        if (!_mazeMap.ContainsKey(currentPosition) || !_mazeMap[currentPosition][1]) // Check if right is allowed
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
+        _currX++; // Move right
     }
 
     /// <summary>
@@ -50,7 +59,12 @@ public class Maze
     /// </summary>
     public void MoveUp()
     {
-        // FILL IN CODE
+        var currentPosition = (_currX, _currY);
+        if (!_mazeMap.ContainsKey(currentPosition) || !_mazeMap[currentPosition][2]) // Check if up is allowed
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
+        _currY--; // Move up
     }
 
     /// <summary>
@@ -59,9 +73,17 @@ public class Maze
     /// </summary>
     public void MoveDown()
     {
-        // FILL IN CODE
+        var currentPosition = (_currX, _currY);
+        if (!_mazeMap.ContainsKey(currentPosition) || !_mazeMap[currentPosition][3]) // Check if down is allowed
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
+        _currY++; // Move down
     }
 
+    /// <summary>
+    /// Returns the current status of the player's location in the maze.
+    /// </summary>
     public string GetStatus()
     {
         return $"Current location (x={_currX}, y={_currY})";
