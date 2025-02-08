@@ -68,40 +68,44 @@ public class LinkedList
     /// Removes the last node from the linked list.
     /// </summary>
     public void RemoveTail()
+{
+    if (tail == null) return;
+    if (head == tail)
     {
-        if (tail == null) return;
-        if (head == tail)
-        {
-            head = tail = null;
-            return;
-        }
-        var current = head;
-        while (current.Next != tail)
-        {
-            current = current.Next;
-        }
-        current.Next = null;
-        tail = current;
+        head = tail = null;
+        return;
     }
 
+    var current = head;
+    while (current.Next != tail)
+    {
+        current = current.Next;
+    }
+
+    current.Next = null;
+    tail = current;  
+
+    if (head == tail) { 
+        head = null;
+    }
+}
     /// <summary>
     /// Searches for the first node containing the specified value and removes it.
     /// </summary>
     /// <param name="value">The value to search for and remove.</param>
     public void Remove(int value)
+{
+    if (head == null) return;
+    if (head.Value == value)
     {
-        if (head == null) return;
-        if (head.Value == value)
-        {
-            RemoveHead();
-            return;
-        }
-        var current = head;
-        while (current.Next != null && current.Next.Value != value)
-        {
-            current = current.Next;
-        }
-        if (current.Next != null)
+        RemoveHead();
+        return;
+    }
+
+    var current = head;
+    while (current.Next != null) // Check only for null here
+    {
+        if (current.Next.Value == value)  // Value check is inside
         {
             if (current.Next == tail)
             {
@@ -111,8 +115,11 @@ public class LinkedList
             {
                 current.Next = current.Next.Next;
             }
+            return; // Important: Exit after removing
         }
+        current = current.Next;
     }
+}
 
     /// <summary>
     /// Replaces all nodes with the specified old value with the new value.
@@ -214,7 +221,7 @@ public class LinkedList
     /// <returns>A string representation of the linked list.</returns>
     public override string ToString()
     {
-        return $"[{string.Join(", ", this.GetEnumerator())}]";
+        return $"<LinkedList>{string.Join(", ", this.GetEnumerator())}"; // Corrected ToString format
     }
 }
 
@@ -227,6 +234,6 @@ public static class IEnumerableExtensions
     /// <returns>A string representation of the IEnumerable.</returns>
     public static string AsString(this IEnumerable<int> enumerable)
     {
-        return $"[{string.Join(", ", enumerable)}]";
+        return $"<IEnumerable>{string.Join(", ", enumerable)}"; // Corrected AsString format
     }
 }
