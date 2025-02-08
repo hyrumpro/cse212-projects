@@ -49,36 +49,34 @@ public static class SetsAndMaps
     {
         if (word1 == null || word2 == null) return false;
 
-        ReadOnlySpan<char> span1 = word1.AsSpan().Trim();
-        ReadOnlySpan<char> span2 = word2.AsSpan().Trim();
+        ReadOnlySpan<char> span1 = word1.AsSpan();
+        ReadOnlySpan<char> span2 = word2.AsSpan();
         
         Span<int> counts = stackalloc int[26];
-        int totalLetters = 0;
+        int lettersProcessed = 0;
 
-        // Process first word
+        // Process first string directly with bitwise operations
         foreach (char c in span1)
         {
-            char lowerC = char.ToLowerInvariant(c);
-            if (lowerC >= 'a' && lowerC <= 'z') 
+            if ((uint)((c | 0x20) - 'a') <= (uint)('z' - 'a'))
             {
-                counts[lowerC - 'a']++;
-                totalLetters++;
+                counts[(c | 0x20) - 'a']++;
+                lettersProcessed++;
             }
         }
 
-        // Process second word
+        // Process second string with same optimizations
         foreach (char c in span2)
         {
-            char lowerC = char.ToLowerInvariant(c);
-            if (lowerC >= 'a' && lowerC <= 'z') 
+            if ((uint)((c | 0x20) - 'a') <= (uint)('z' - 'a'))
             {
-                counts[lowerC - 'a']--;
-                totalLetters--;
-                if (counts[lowerC - 'a'] < 0) return false;
+                int idx = (c | 0x20) - 'a';
+                if (--counts[idx] < 0) return false;
+                lettersProcessed--;
             }
         }
 
-        return totalLetters == 0;
+        return lettersProcessed == 0;
     }
 
     public static string[] EarthquakeDailySummary()
