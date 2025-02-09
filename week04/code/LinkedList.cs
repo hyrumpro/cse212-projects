@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generi i
+
 
 public class LinkedList
 {
